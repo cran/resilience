@@ -1,0 +1,7 @@
+export("prepost")
+importFrom("stats", "model.frame", "as.formula", "terms",
+               "model.matrix", "reformulate", "coef", "lm", "cor")
+importFrom("nptest", "np.boot")
+importFrom("parallel", "detectCores", "makeCluster")
+importFrom("doParallel", "registerDoParallel")
+importFrom("foreach", "foreach", "%dopar%")
