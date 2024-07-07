@@ -49,7 +49,7 @@ prepost <- function(formula, data, change=TRUE, k=c(1.0,1.5,2.0), m=1, nboot=100
   
   for (j in 1:length(k)){
     krho <- k[j]*rho
-    correction.1b <- (1 - krho) / (1-S) - (1 - 1*change)
+    correction.1b <- (m - krho) / (1-S) - (m - 1*change)
     if (npar > 2) {
       correction.xb <- (krho - 1)/(1-S)*coef(mod1)[-1]
       correction.b <- c(correction.1b, correction.xb)
