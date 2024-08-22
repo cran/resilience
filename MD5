@@ -1,6 +1,6 @@
-e44ddd479e040a9e38ceebc101cdae1d *DESCRIPTION
+1fab822fb3e4be8dce8394fd06e4c8f8 *DESCRIPTION
 ecb4aa0556721fc06994762b7f5683ec *NAMESPACE
-ac485f1ec33ac852951913e0d318f4a5 *R/pre-post-regression.R
+5cd3d52dc41afce498cc2e2d503b60b4 *R/pre-post-regression.R
 883c9daad0f12cfe1e50234fb41a76fb *data/tkr.RData
 503ffd4019d81af555cf1dbebb2ad9e4 *man/prepost.Rd
 01eb720a3749ffed388b5a1003328964 *man/resilience-package.Rd

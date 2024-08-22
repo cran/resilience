@@ -51,7 +51,7 @@ prepost <- function(formula, data, change=TRUE, k=c(1.0,1.5,2.0), m=1, nboot=100
     krho <- k[j]*rho
     correction.1b <- (m - krho) / (1-S) - (m - 1*change)
     if (npar > 2) {
-      correction.xb <- (krho - 1)/(1-S)*coef(mod1)[-1]
+      correction.xb <- (krho - m)/(1-S)*coef(mod1)[-1]
       correction.b <- c(correction.1b, correction.xb)
     } else correction.b <- correction.1b
     beta[,j] <-   beta.naive + c(0, correction.b)
