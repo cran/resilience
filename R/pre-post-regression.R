@@ -61,7 +61,7 @@
 #' \emph{Biostatistics}. 25(4): 1094-1111.
 #'
 #' @seealso 
-#' \code{\link{prepost_resilience_mi_list}} for analysis with multiply imputed data.
+#' \code{\link{prepost_mi}} for analysis with multiply imputed data.
 #'
 #' @examples
 #' \dontrun{
@@ -134,8 +134,8 @@ prepost <- function(formula, data, change=TRUE, k=c(1.0,1.5,2.0), m=1, nboot=100
       warning(sprintf(
         "Data contains %d missing values in model variables. ",
         missing_count
-      ), "Results are based on complete cases only. ",
-      "Consider using multiple imputation with prepost_resilience_mi_list() ",
+      ), "Results are based on complete cases only.", "\n", 
+      "Consider multiply imputated analysis with prepost_mi() ",
       "for more robust inference.")
     }
   }

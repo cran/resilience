@@ -121,7 +121,7 @@ Resilience to Stressors in Single-Arm Studies of Pre-Post Change.
 \emph{Biostatistics}. 25(4): 1094-1111.
 }
 \seealso{
-\code{\link{prepost_resilience_mi_list}} for analysis with multiply imputed data.
+\code{\link{prepost_mi}} for analysis with multiply imputed data.
 }
 \author{
 Ravi Varadhan

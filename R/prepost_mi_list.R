@@ -1,6 +1,6 @@
-#' Prep-Resilience Analysis with Pre-Imputed Datasets
+#' Prepost Analysis with Pre-Imputed Datasets
 #'
-#' This function takes a list of already imputed datasets and runs resilience analysis
+#' This function takes a list of already imputed datasets and runs prepost (resilience) regression analysis
 #' on each, then pools the results using Rubin's rules. Users are responsible for
 #' the imputation process, allowing maximum flexibility in imputation methods.
 #'
@@ -14,11 +14,13 @@
 #' @param ... Additional arguments passed to prepost()
 #'
 #' @return A list containing:
-#'   - pooled_results: The pooled estimates
-#'   - results_table: Formatted results table
-#'   - individual_results: List of results from each imputation
-#'   - model_info: Information about the model specification
-#'   - imputation_info: Summary of imputation characteristics
+#' \describe{
+#'   \item{\code{pooled_results}}{The pooled estimates}
+#'   \item{\code{results_table}}{Formatted results table}
+#'   \item{\code{individual_results}}{List of results from each imputation}
+#'   \item{\code{model_info}}{Information about the model specification}
+#'   \item{\code{imputation_info}}{Summary of imputation characteristics}
+#' }
 #'
 #'@seealso 
 #' \code{\link{prepost}} for complete-case analysis without missing data
@@ -67,7 +69,7 @@
 #' }
 #' 
 #' # Run resilience analysis on the pre-imputed list
-#' result <- prepost_resilience_mi_list(
+#' result <- prepost_mi(
 #'   data_list = imp_list,
 #'   formula = post_score ~ pre_score + age + bmi,
 #'   k = 1.2,
@@ -75,14 +77,14 @@
 #' )
 #' 
 #' # Example 2: Directly using a mice mids object
-#' result2 <- prepost_resilience_mi_list(
+#' result2 <- prepost_mi(
 #'   data_list = imp_mice,  # mids object
 #'   formula = post_score ~ pre_score + age + bmi
 #' )
 #' }
 #'
 #' @export
-prepost_resilience_mi_list <- function(data_list, 
+prepost_mi <- function(data_list, 
                                        formula, 
                                        k = 1.0, 
                                        nboot = 500,
@@ -256,7 +258,6 @@ prepost_resilience_mi_list <- function(data_list,
   class(output) <- "prepost_resilience_mi_list"
   
   if (verbose) {
-    cat("Analysis complete!\n")
     cat("\nPooled Results:\n")
     print(results_table[, 1:6])
     cat("\nImputation Diagnostics:\n")
@@ -476,15 +477,16 @@ create_results_table_list <- function(pooled_results, coef_labels = NULL) {
     Coefficient = names(pooled_results$coefficients),
     Estimate = round(pooled_results$coefficients, 4),
     SE = round(pooled_results$se, 4),
-    `95% CI Lower` = round(pooled_results$ci_lower, 4),
-    `95% CI Upper` = round(pooled_results$ci_upper, 4),
+    ` 95%_CI_Lower` = round(pooled_results$ci_lower, 4),
+    ` 95%_CI_Upper` = round(pooled_results$ci_upper, 4),
     df = round(pooled_results$df, 1),
     Within_Var = round(pooled_results$within_var, 6),
     Between_Var = round(pooled_results$between_var, 6),
     FMI = round(pooled_results$fraction_missing_info, 3),
-    stringsAsFactors = FALSE
+    stringsAsFactors = FALSE,
+    check.names = FALSE
   )
-  
+
   # Apply custom coefficient labels if provided
   if (!is.null(coef_labels)) {
     if (!is.character(coef_labels) || is.null(names(coef_labels))) {
@@ -556,7 +558,7 @@ calculate_imputation_diagnostics <- function(results_list, reference_data) {
 #' @param x An object of class \code{prepost_resilience_mi_list}.
 #' @param ... Additional arguments passed to plotting functions.
 #' @export
-print.prepost_resilience_mi_list <- function(x, ...) {
+print.prepost_mi <- function(x, ...) {
   cat("Prepost Resilience Analysis on Pre-Imputed Datasets\n")
   cat("===================================================\n")
   cat(sprintf("Formula: %s\n", deparse(x$model_info$formula)))
@@ -575,7 +577,7 @@ print.prepost_resilience_mi_list <- function(x, ...) {
 #' @param object An object of class \code{prepost_resilience_mi_list}.
 #' @param ... Additional arguments passed to plotting functions.
 #' @export
-summary.prepost_resilience_mi_list <- function(object, ...) {
+summary.prepost_mi <- function(object, ...) {
   cat("Summary: Prepost Resilience Analysis on Pre-Imputed Datasets\n")
   cat("============================================================\n")
   
@@ -607,7 +609,7 @@ summary.prepost_resilience_mi_list <- function(object, ...) {
 #' @param type Type of plot: \code{"estimates"} (default) or \code{"fmi"}.
 #' @param ... Additional arguments passed to plotting functions.
 #' @export
-plot.prepost_resilience_mi_list <- function(x, type = "coefficients", ...) {
+plot.prepost_mi <- function(x, type = "coefficients", ...) {
   if (type == "coefficients") {
     # Plot coefficient estimates across imputations
     n_coef <- length(x$pooled_results$coefficients)

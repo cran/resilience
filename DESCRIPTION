@@ -1,8 +1,8 @@
 Package: resilience
 Type: Package
 Title: Predictors of Resilience to a Stressor in a Single-Arm Study
-Version: 2025.1.0
-Date: 2025-12-10
+Version: 2025.1.1
+Date: 2025-12-13
 Authors@R: 
   c(person(given = "Ravi",
            family = "Varadhan",
@@ -19,10 +19,10 @@ License: GPL (>= 2)
 LazyLoad: yes
 NeedsCompilation: no
 Repository: CRAN
-Packaged: 2025-12-11 21:35:10 UTC; raviv
+Packaged: 2025-12-13 16:40:35 UTC; raviv
 Author: Ravi Varadhan [aut, cre],
   Jiafeng Zhu [ctb]
 RoxygenNote: 7.3.3
 Encoding: UTF-8
 LazyData: true
-Date/Publication: 2025-12-11 22:40:02 UTC
+Date/Publication: 2025-12-15 08:40:02 UTC
